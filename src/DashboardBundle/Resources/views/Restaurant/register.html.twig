@@ -1,0 +1,70 @@
+{% extends "DashboardBundle:Layouts:layout.html.twig"%}
+{% block stylessheets %}
+	{{ parent() }}
+
+{% endblock %}
+{% block content %}
+	{{ parent() }}
+	<div class="col-lg-5 col-lg-offset-1 box-form"> 
+		<p class="h4 text-center mb-4">Registrar nuevo Restaurante</p>
+		<hr/>
+
+
+		{{form_start(form,{'action':'','method':'POST'})}}
+		{{form_label(form.image)}}
+		<div class="md-form">
+
+			{{form_widget(form.image)}}
+		</div>
+		<div class="md-form">
+			{{form_label(form.name)}}
+			{{form_widget(form.name)}}
+		</div>
+		<div class="md-form">
+			{{ form_row(form.description) }}
+		</div>
+		<div class="md-form">
+			{{ form_row(form.minOrder) }}
+		</div>
+		<div class="md-form">
+			{{ form_row(form.deliveryCost) }}
+		</div>
+
+		<div class="md-form">
+			{{ form_row(form.street) }}
+		</div>
+		<div class="md-form">
+			{{ form_row(form.num) }}
+		</div>
+		<div class="md-form">
+			{{ form_row(form.postCode) }}
+		</div>
+		<div class="md-form">
+			{{ form_row(form.startTime) }}
+		</div>
+		<div class="md-form">
+			{{ form_row(form.endTime) }}
+		</div>
+
+
+
+		{{form_errors(form)}}
+		<center>
+			{{form_end(form)}}
+		</center>
+
+
+		<script>
+			$('.my-time-picker').pickatime({});
+			$(document).ready(function () {
+
+
+
+
+				$('.mdb-select').material_select();
+			});
+		</script>
+
+	</div>
+
+{%endblock%}

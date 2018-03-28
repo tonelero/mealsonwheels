@@ -1,0 +1,100 @@
+{% extends "DashboardBundle:Layouts:layout.html.twig"%}
+{% block stylessheets %}
+	{{ parent() }}
+
+{% endblock %}
+{% block content %}
+	{{ parent() }}
+
+	<h2> Últimas órdenes </h2>
+	<hr/>
+
+	
+	<table class="table table-hover">
+
+		<!--Table head-->
+		<thead class="mdb-color darken-3">
+			<tr class="text-white">
+				<th style="width: 10%">#</th>
+				<th style="width: 20%; text-align: center">Usuario</th>
+				<th style="width: 20%;text-align: center">Restaurante</th>
+				<th style="width: 15%;text-align: center">Fecha Pedido</th>
+				<th style="width: 35%;text-align: center">Detalles</th>
+				
+			</tr>
+		</thead>
+		<!--Table head-->
+
+		<!--Table body-->
+		<tbody>
+			{% set count= 1%}
+			{% for restaurant in orders%}
+
+
+				<tr>
+					<th scope="row">{{count}}</th>
+					<td class="center-column">{{restaurant.user.name}}</td>
+					<td class="center-column">{{restaurant.restaurant.name}}</td>
+					<td class="center-column">{{restaurant.createdAt|date('H:i--d/m/Y')}}</td>
+					<td class="center-column" style="padding: 0 !important;"><a class="btn btn-secondary"  href="{{ path('orderdetail_list', {'id': restaurant.id }) }}"role="button">Ver Detalles</a>
+						
+						<button  type="button" class="btn btn-danger" id="{{restaurant.id}}" data-toggle="modal" data-target="#exampleModal">Eliminar</button>
+					</td>
+				</tr>
+
+
+
+
+
+{% set count= count +1%}
+
+
+
+
+
+
+			{%endfor%}
+
+		</tbody>
+		<!--Table body-->
+
+	</table>
+	<!--Table-->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Eliminar Pedido</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body edit-content">
+                
+            </div>
+            <div class="modal-footer edit-button">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               <a class="btn btn-danger"  href="#"role="button">Eliminar</a>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+					$('#exampleModal').on('show.bs.modal', function(e) {
+            
+            var $modal = $(this),
+                 esseyId = e.relatedTarget.id;
+				 
+				 var borrar ='{{ path('order_delete', {'id': 'text' }) }}';
+				
+				url = borrar.replace("text", esseyId);
+				$("a[href='#']").attr('href',url );
+				
+                   $modal.find('.edit-content').text("¿Estás seguro que deseas borrar este pedido de la lista de pedidos?");
+				  
+            
+        });
+				</script>
+	
+{% endblock%}
+

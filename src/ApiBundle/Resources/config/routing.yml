@@ -1,0 +1,16 @@
+api_restaurant:
+    resource: "@ApiBundle/Resources/config/routing/restaurant.yml"
+    prefix: /
+    
+api_product:
+    resource: "@ApiBundle/Resources/config/routing/product.yml"
+    prefix: /
+api_rating:
+    resource: "@ApiBundle/Resources/config/routing/rating.yml"
+    prefix: /
+api_order:
+    resource: "@ApiBundle/Resources/config/routing/order.yml"
+    prefix: /
+api_orderDetails:
+    resource: "@ApiBundle/Resources/config/routing/orderDetails.yml"
+    prefix: /

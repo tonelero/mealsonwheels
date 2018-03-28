@@ -1,0 +1,19 @@
+#BackendBundle\Entity\Restaurants:
+#    properties:
+#        description:
+#            - Length:
+#                min: 20
+#                max: 250
+#                minMessage: 'La descripción debe ser superior a {{ limit }} caracteres'
+#                maxMessage: 'La descripción debe ser inferior a {{ limit }} caracteres'
+#        
+BackendBundle\Entity\Users:
+    properties:
+        nick:
+            - Length:
+                min: 3
+                max: 20
+                minMessage: 'El nick debe ser superior a {{ limit }} caracteres'
+                maxMessage: 'El nick debe ser ingerior a {{ limit }} caracteres'
+        
+        

@@ -1,0 +1,6 @@
+ratings:
+    path: api/ratings/{restaurant}
+    defaults: {_controller : ApiBundle:Rating:list,restaurant:null}
+rating_new:
+    path: api/rating/new
+    defaults: {_controller : ApiBundle:Rating:new}

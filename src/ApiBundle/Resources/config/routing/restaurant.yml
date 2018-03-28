@@ -1,0 +1,3 @@
+list:
+    path: api/list
+    defaults: { _controller: ApiBundle:Restaurant:list}

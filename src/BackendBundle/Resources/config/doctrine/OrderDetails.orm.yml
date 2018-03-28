@@ -1,0 +1,52 @@
+BackendBundle\Entity\OrderDetails:
+    type: entity
+    table: order_details
+    indexes:
+        fk_details_products:
+            columns:
+                - product
+        IDX_845CA2C18D9F6D38:
+            columns:
+                - order_id
+    uniqueConstraints:
+        order_uniques_fields:
+            columns:
+                - order_id
+                - product
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        quantity:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+    manyToOne:
+        order:
+            targetEntity: Orders
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                order_id:
+                    referencedColumnName: id
+            orphanRemoval: false
+        product:
+            targetEntity: Products
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                product:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

@@ -1,0 +1,117 @@
+{% extends "DashboardBundle:Layouts:layout.html.twig"%}
+{% block stylessheets %}
+	{{ parent() }}
+
+{% endblock %}
+{% block content %}
+	{{ parent() }}
+
+	<h2> Últimas órdenes </h2>
+
+	<table class="table table-hover" >
+
+		<!--Table head-->
+		<thead class="mdb-color darken-3">
+			<tr class="text-white">
+				<th style="width: 10%">#</th>
+				<th style="width: 60%">Nombre del producto</th>
+				<th style="width: 10%; text-align: center">Cantidad</th>
+				<th style="width: 20%; text-align: center">Accion</th>
+			</tr>
+		</thead>
+		<!--Table head-->
+
+		<!--Table body-->
+		<tbody>
+			{% set count= 1%}
+			{% for restaurant in products%}
+
+
+				<tr>
+					<th style="padding-top: 28px" scope="row">{{count}}</th>
+					<td style="padding-top: 28px">{{restaurant.product.name}}</td>
+					<td class="center-column" style="padding-top: 28px">{{restaurant.quantity}}</td>
+					<td class="center-column" style="padding-top: 10px;">
+						<button  type="button" class="btn btn-danger" id="{{restaurant.id}}" name="{{restaurant.product.name}}" data-toggle="modal" data-target="#exampleModal">Eliminar</button>
+						
+						
+					</td>
+				</tr>
+
+				{% set count= count +1%}
+				
+				
+				
+				
+				<!--{{ path('order_delete', {'id': restaurant.id }) }}-->
+				
+			{%endfor%}
+
+		</tbody>
+		<!--Table body-->
+
+	</table>
+	<!--Table-->
+	<center>
+	<div class="w-50 p-3">
+		
+	{{form_start(form,{'action':'','method':'POST','attr': {'class': 'form-inline'}})}}
+	
+
+	{{form_errors(form)}}
+	{{form_end(form)}}
+	
+	</div>
+	</center>
+	
+		<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modificar Pedido</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body edit-content">
+                
+            </div>
+            <div class="modal-footer edit-button">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+               <a class="btn btn-danger"  href="#"role="button">Eliminar</a>
+            </div>
+        </div>
+    </div>
+</div>		
+				<script>
+					$('#exampleModal').on('show.bs.modal', function(e) {
+            
+            var $modal = $(this),
+                 esseyId = e.relatedTarget.id;
+				 name = e.relatedTarget.name;
+				 var borrar ='{{ path('order_delete', {'id': 'text'}) }}';
+				
+				url = borrar.replace("text", esseyId);
+				$("a[href='#']").attr('href',url );
+				console.log(name);
+                   $modal.find('.edit-content').text("¿Estás seguro que deseas borrar el producto "+ name +" de la lista de pedidos?");
+				  
+            
+        });
+				</script>
+	<script>
+
+		$(document).ready(function () {
+
+			$('.mdb-select').material_select();
+		});
+	
+		
+	</script>
+
+	
+	
+				
+		
+{% endblock%}
+

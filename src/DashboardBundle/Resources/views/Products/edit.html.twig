@@ -1,0 +1,32 @@
+{% extends "DashboardBundle:Layouts:layout.html.twig"%}
+{% block stylessheets %}
+	{{ parent() }}
+	
+{% endblock %}
+{% block content %}
+	{{ parent() }}
+<div class="col-lg-5 box-form"> 
+	<h2> Editar Producto {{product.name}} del Restaurante {{product.restaurant.name}}</h2>
+	<hr/>
+	
+{%set hola = '7'%}
+	{{form_start(form,{'action':'','method':'POST'})}}
+	{{form_errors(form)}}
+	{{form_end(form)}}
+
+
+	<script>
+		$('.my-time-picker').pickatime({});
+	 $(document).ready(function() {
+		 
+		 
+		 
+		 
+    $('.mdb-select').material_select();
+  });	
+	</script>
+
+</div>
+{% endblock%}
+
+ 

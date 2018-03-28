@@ -1,0 +1,15 @@
+restaurant_new:
+    path: /restaurant/new/
+    defaults: { _controller: DashboardBundle:Restaurant:register }
+restaurant_list:
+    path: /restaurant/list/
+    defaults: { _controller: DashboardBundle:Restaurant:list }
+restaurant_listProduct:
+    path: /restaurant/listProduct/
+    defaults: { _controller: DashboardBundle:Restaurant:listProduct }
+restaurant_delete:
+    path: /restaurant/delete/{id}
+    defaults: { _controller: DashboardBundle:Restaurant:delete,$restaurant:null }
+restaurant_edit:
+    path: /restaurant/edit/{id}
+    defaults: { _controller: DashboardBundle:Restaurant:edit,$restaurant:null }

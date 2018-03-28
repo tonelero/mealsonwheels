@@ -1,0 +1,29 @@
+login:
+    path: /login
+    defaults: { _controller: DashboardBundle:User:login }
+login2:
+    path: api/login
+    defaults: { _controller: DashboardBundle:User:login2 }
+    methods: post
+login_check:
+    path: /login_check
+logout:
+    path: /logout
+user_edit:
+    path: /my-data
+    defaults: { _controller: DashboardBundle:User:editUser }
+register:
+    path: /register
+    defaults: { _controller: DashboardBundle:User:register }
+
+prueba:
+    path: /prueba
+    defaults: { _controller: DashboardBundle:User:prueba }
+register2:
+    path: api/register
+    defaults: { _controller: DashboardBundle:User:register2 }
+upload:
+    path: api/upload-image-user
+    defaults: { _controller: DashboardBundle:User:uploadImage }
+    methods: POST
+

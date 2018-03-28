@@ -1,0 +1,45 @@
+{% extends "DashboardBundle:Layouts:layout.html.twig"%}
+{% block stylessheets %}
+	{{ parent() }}
+	
+{% endblock %}
+{% block content %}
+	{{ parent() }}<div class="col-lg-5 col-lg-offset-1 box-form"> 
+	    <p class="h4 text-center mb-4">Editar Perfil</p>
+
+	<hr/>
+	
+
+	{{form_start(form,{'action':'','method':'POST'})}}
+	<div class="md-form">
+		{{ form_row(form.name) }}
+	</div>
+	<div class="md-form">
+		{{ form_row(form.surname) }}
+	</div>
+	<div class="md-form">
+		{{ form_row(form.nick) }}
+		
+	</div>
+	<div class="md-form">
+		{{ form_row(form.email) }}
+	</div>
+	
+	{{form_label(form.image)}}
+	
+	{% if form.vars.value.image is not null %}
+    <img src="{{ asset('uploads/users/' ~ form.vars.value.image) }}" class="img-thumbnail" width="350px"/>
+	{% else %}
+		 <img src="{{ asset('uploads/users/default.jpg') }}" width ="250px"  alt="avatar mx-auto white" class="rounded-circle img-fluid" />
+{% endif %}
+{{form_widget(form.image)}}
+	
+	
+	{{form_errors(form)}}
+	<center>
+	{{form_end(form)}}
+	</center>
+
+
+</div>
+{% endblock%}

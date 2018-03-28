@@ -1,0 +1,98 @@
+BackendBundle\Entity\Restaurants:
+    type: entity
+    table: restaurants
+    indexes:
+        fk_restaurants_users:
+            columns:
+                - user
+    id:
+        id:
+            type: integer
+            nullable: false
+            options:
+                unsigned: false
+            id: true
+            generator:
+                strategy: IDENTITY
+    fields:
+        description:
+            type: text
+            nullable: true
+            length: 16777215
+            options:
+                fixed: false
+        minOrder:
+            type: decimal
+            nullable: true
+            precision: 10
+            scale: 2
+            column: min_order
+        deliveryCost:
+            type: decimal
+            nullable: true
+            precision: 10
+            scale: 2
+            column: delivery_cost
+        image:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        category:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        street:
+            type: string
+            nullable: true
+            length: 255
+            options:
+                fixed: false
+        num:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+        postCode:
+            type: string
+            nullable: true
+            length: 20
+            options:
+                fixed: false
+            column: post_code
+        days:
+            type: array
+            nullable: true
+            length: 7
+            options:
+                fixed: false
+        startTime:
+            type: time
+            nullable: true
+            column: start_time
+        endTime:
+            type: time
+            nullable: true
+            column: end_time
+        name:
+            type: string
+            nullable: true
+            length: 50
+            options:
+                fixed: false
+    manyToOne:
+        user:
+            targetEntity: Users
+            cascade: {  }
+            fetch: LAZY
+            mappedBy: null
+            inversedBy: null
+            joinColumns:
+                user:
+                    referencedColumnName: id
+            orphanRemoval: false
+    lifecycleCallbacks: {  }

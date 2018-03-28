@@ -1,0 +1,16 @@
+dashboard_user:
+    resource: "@DashboardBundle/Resources/config/routing/user.yml"
+    prefix: /
+dashboard_restaurant:
+    resource: "@DashboardBundle/Resources/config/routing/restaurant.yml"
+    prefix: /
+dashboard_product:
+    resource: "@DashboardBundle/Resources/config/routing/product.yml"
+    prefix: /
+dashboard_order:
+    resource: "@DashboardBundle/Resources/config/routing/order.yml"
+    prefix: /
+index:
+    path: /index
+    defaults: { _controller: DashboardBundle:Default:index }
+  

@@ -1,0 +1,164 @@
+{% extends "DashboardBundle:Layouts:layout.html.twig"%}
+{% block stylessheets %}
+	{{ parent() }}
+	
+
+{% endblock %}
+{% block content %}
+	{{ parent() }}
+	
+	<h2 style="text-align: center"> Tus restaurantes</h2>
+	<hr/>
+
+	<div class="row">
+		
+{% for restaurant in restaurants%}
+	<!--Card-->
+    <div class="card col-md-4" style="width: 23rem;">
+
+        <!--Card image-->
+        <div class="view overlay">
+            <img src="https://restaurantesenlosquehemoscomido.files.wordpress.com/2017/01/jordi-cruz.jpg" class="img-fluid" alt="">
+            <a href="#">
+                <div class="mask rgba-white-slight"></div>
+            </a>
+        </div>
+
+        <!--Card content-->
+        <div class="card-body">
+            <!--Title-->
+            <h4 class="card-title" style="text-align: center"><strong>{{restaurant.name}}</strong></h4>
+            <!--Text-->
+			<p class="card-text" style="text-align: center">{{restaurant.description}}</p>
+            <p class="card-text" style="text-align: center; ">Abre a las {{restaurant.startTime|date('H:i')}}. Cierra a las {{restaurant.endTime|date('H:i')}}</p>
+            <div class="botones" style="text-align: center">
+						
+			</div>
+        </div>
+
+    </div>
+    <!--/.Card-->
+	{%endfor%}
+	
+
+	</div>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<!--
+	
+	<table class="table">
+
+		
+		<thead class="mdb-color darken-3 table-hover">
+			<tr class="text-white">
+				<th>#</th>
+				<th>Nombre</th>
+				<th>Hora Apertura</th>
+				<th>Hora Cierre</th>
+				<th>Categoría</th>
+				<th>Calle</th>
+				<th>Pedido Min</th>
+				<th>Coste Reparto</th>
+				<th>Acciones</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			{% set count= 1%}
+			
+			{% for restaurant in restaurants%}
+
+
+				<tr>
+					<th scope="row">{{count}}</th>
+					<td>{{restaurant.name}}</td>
+					<td>{{restaurant.startTime|date('H:i')}}</td>
+					<td>{{restaurant.endTime|date('H:i')}}</td>
+					<td>{{restaurant.category}}</td>
+					<td>{{restaurant.street}}</td>
+					<td>{{restaurant.minOrder}}</td>
+					<td>{{restaurant.deliveryCost}}</td>
+					<td>
+							<button type="button" class="btn btn-secondary" id="{{restaurant.id}}" data-toggle="modal" data-target="#exampleModal">
+    Editar
+</button>
+						<a class="btn btn-danger" href="{{ path('restaurant_delete', {'id': restaurant.id }) }}" role="button">Eliminar</a>
+					</td>
+				</tr>
+
+
+
+
+
+{% set count= count +1%}
+
+
+
+
+
+
+			{%endfor%}
+
+		</tbody>
+
+
+	</table>
+-->
+
+
+
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            
+               
+           
+            <div class="modal-body edit-content">
+				 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+				<div>
+					{% set restaurante= '1'%}
+                {{ render(controller('DashboardBundle:Restaurant:edit', { 'id': 1 })) }}
+				</div>
+            </div>
+           
+        </div>
+    </div>
+</div>
+				
+				<script>
+					$('#exampleModal').on('show.bs.modal', function(e) {
+            
+            var $modal = $(this),
+                esseyId = e.relatedTarget.id;
+				
+		
+
+                   $modal.find('.edit-content').text(esseyId);
+
+            
+        });
+				</script>
+
+			{% endblock%}

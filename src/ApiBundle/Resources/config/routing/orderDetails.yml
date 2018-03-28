@@ -1,0 +1,6 @@
+order_detail:
+    path: api/ordersDetails/{order}
+    defaults: {_controller : ApiBundle:OrderDetails:list,order:null}
+order_details_new:
+    path: api/order/new
+    defaults: {_controller : ApiBundle:OrderDetails:new}

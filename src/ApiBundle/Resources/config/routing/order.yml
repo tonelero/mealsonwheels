@@ -1,0 +1,3 @@
+orders_list:
+    path: api/orders/{user}
+    defaults: {_controller : ApiBundle:Order:list,user:null}

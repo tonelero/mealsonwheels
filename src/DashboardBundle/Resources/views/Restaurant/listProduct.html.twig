@@ -1,0 +1,156 @@
+{% extends "DashboardBundle:Layouts:layout.html.twig"%}
+{% block stylessheets %}
+	{{ parent() }}
+
+{% endblock %}
+{% block content %}
+	{{ parent() }}
+
+	<h2 style="text-align: center"> Tus restaurantes</h2>
+	<hr/>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	<div class="row">
+		
+{% for restaurant in restaurants%}
+	<!--Card-->
+    <div class="card col-md-4" style="width: 23rem;">
+
+        <!--Card image-->
+        <div class="view overlay">
+            <img src="https://restaurantesenlosquehemoscomido.files.wordpress.com/2017/01/jordi-cruz.jpg" class="img-fluid" alt="">
+            <a href="#">
+                <div class="mask rgba-white-slight"></div>
+            </a>
+        </div>
+
+        <!--Card content-->
+        <div class="card-body">
+            <!--Title-->
+            <h4 class="card-title" style="text-align: center"><strong>{{restaurant.name}}</strong></h4>
+            <!--Text-->
+			<p class="card-text" style="text-align: center">{{restaurant.description}}</p>
+            <p class="card-text horario" >Abre a las {{restaurant.startTime|date('H:i')}}. Cierra a las {{restaurant.endTime|date('H:i')}}</p>
+            <div class="botones"><a class="btn-sm btn-amber"  href="{{ path('product_new', {'restaurant': restaurant.id }) }}"role="button">Nuevo producto</a>
+						<a class="btn-sm btn-secondary"  href="{{ path('product_list', {'restaurant': restaurant.id }) }}"role="button">Editar productos</a> 
+			</div>
+        </div>
+
+    </div>
+    <!--/.Card-->
+	{%endfor%}
+	
+
+	</div>
+		<!--
+	<table class="table">
+
+		
+		<thead class="mdb-color darken-3">
+			<tr class="text-white">
+				<th>#</th>
+				<th>Nombre</th>
+				<th>Hora Apertura</th>
+				<th>Hora Cierre</th>
+				<th>Categoría</th>
+				<th>Calle</th>
+				<th>Pedido Min</th>
+				<th>Coste Reparto</th>
+				<th>Acciones</th>
+			</tr>
+		</thead>
+		
+		<tbody>
+			{% set count= 1%}
+			{% for restaurant in restaurants%}
+
+
+				<tr>
+					<th scope="row">{{count}}</th>
+					<td>{{restaurant.name}}</td>
+					<td>{{restaurant.startTime|date('H:i')}}</td>
+					<td>{{restaurant.endTime|date('H:i')}}</td>
+					<td>{{restaurant.category}}</td>
+					<td>{{restaurant.street}}</td>
+					<td>{{restaurant.minOrder}}</td>
+					<td>{{restaurant.deliveryCost}}</td>
+					<td>
+						<a class="btn btn-amber"  href="{{ path('product_new', {'restaurant': restaurant.id }) }}"role="button">Nuevo producto</a>
+						<a class="btn btn-secondary"  href="{{ path('product_list', {'restaurant': restaurant.id }) }}"role="button">Editar productos</a>
+							
+					</td>
+				</tr>
+
+
+
+
+
+{% set count= count +1%}
+
+
+
+
+
+
+			{%endfor%}
+
+		</tbody>
+		
+
+	</table>
+	<!--
+
+
+	<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+						<span aria-hidden="true">&times;</span>
+					</button>
+				</div>
+				<div class="modal-body">
+					{{dump(restaurants)}}
+					{{form_start(form,{'action':'','method':'POST'})}}
+					{{ form_widget(form.name, {  'attr': {'class': 'modal-name'} }) }}
+					{{ form_widget(form.description, {'value' : 'Default title'}) }}
+					{{form_errors(form)}}
+					{{form_end(form)}}
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-primary">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal -->
+	<script>
+		$('#exampleModal').on('show.bs.modal', function (event) {
+			var button = $(event.relatedTarget) // Button that triggered the modal
+			var recipient = button.data('info') // Extract info from data-* attributes
+			console.log(recipient);
+			// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+			// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+			var modal = $(this)
+			modal.find('.modal-name').text('New message to ' + recipient)
+
+		})
+	</script>
+
+{% endblock%}
+

@@ -1,0 +1,68 @@
+{% extends "DashboardBundle:Layouts:layout.html.twig"%}
+{% block stylessheets %}
+	{{ parent() }}
+
+{% endblock %}
+{% block content %}
+	{{ parent() }}
+
+	<h2> Lista de productos del restaurante {{restaurant.name}}</h2>
+	<hr/>
+
+	
+	<table class="table">
+
+		<!--Table head-->
+		<thead class="mdb-color darken-3">
+			<tr class="text-white">
+				<th>#</th>
+				<th>Nombre</th>
+				<th>Descripción</th>
+				<th>Precio</th>
+				<th>Tipo</th>
+				<th>Acciones</th>
+			</tr>
+		</thead>
+		<!--Table head-->
+
+		<!--Table body-->
+		<tbody>
+			{% set count= 1%}
+			{% for restaurant in products%}
+
+
+				<tr>
+					<th scope="row">{{count}}</th>
+					<td>{{restaurant.name}}</td>
+					<td>{{restaurant.description}}</td>
+					<td>{{restaurant.price}}</td>
+					<td>{{restaurant.type}}</td>
+					<td><a class="btn btn-secondary"  href="{{ path('product_edit', {'id': restaurant.id }) }}"role="button">Editar</a>
+						<a class="btn btn-danger" href="{{ path('product_delete', {'id': restaurant.id }) }}" role="button">Eliminar</a>
+					</td>
+				</tr>
+
+
+
+
+
+{% set count= count +1%}
+
+
+
+
+
+
+			{%endfor%}
+
+		</tbody>
+		<!--Table body-->
+
+	</table>
+	<!--Table-->
+
+
+	
+
+{% endblock%}
+

@@ -1,0 +1,36 @@
+#selectCenter {
+	text-align: center;
+}
+.row{
+	justify-content:center;
+}
+.center-column{
+	text-align: center;
+	padding-top: 0px;
+
+}
+.center-column{
+	text-align: center;
+	padding-top: 0px;
+
+}
+.botones{
+	position: absolute;
+	bottom:5px;
+	margin: 0 auto;
+	left: 17%;
+	right: 15%;
+}
+.horario{
+	text-align: center;
+}
+.form-area{
+	height: auto;
+}
+.mdb-select {
+	width: 100%;
+	padding-top: 2rem;
+}
+.box-form{
+	margin: 0 auto;
+}

@@ -1,0 +1,42 @@
+
+<div > 
+	<h2> Editar Restaurante {{restaurant.name}}</h2>
+	<hr/>
+	
+{%set hola = '7'%}
+	{{form_start(form,{'action':'','method':'POST'})}}
+	
+	{{form_label(form.image)}}
+	
+	{% if form.vars.value.image is not null %}
+    <img src="{{ asset('uploads/restaurants/' ~ form.vars.value.image) }}" class="img-thumbnail" width="350px"/>
+	{% else %}
+		 <img src="{{ asset('uploads/restaurants/default.jpg') }}" width ="250px"  alt="avatar mx-auto white" class="rounded-circle img-fluid" />
+{% endif %}
+{{form_widget(form.image)}}
+	
+	{{form_label(form.startTime)}}
+	{{form_widget(form.startTime, {'value':restaurant.startTime|date('h:iA')})}}
+	{{form_label(form.endTime)}}
+	{{form_widget(form.endTime, {'value':restaurant.endTime|date('h:iA')})}}
+	
+	
+	{{form_errors(form)}}
+	{{form_end(form)}}
+
+
+	<script>
+		$('.my-time-picker').pickatime({twelvehour: true});
+	 $(document).ready(function() {
+		 
+		 
+		 
+		 
+    $('.mdb-select').material_select();
+  });	
+	</script>
+
+</div>
+
+
+ 

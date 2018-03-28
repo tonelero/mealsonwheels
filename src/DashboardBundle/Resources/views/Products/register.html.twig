@@ -1,0 +1,56 @@
+{% extends "DashboardBundle:Layouts:layout.html.twig"%}
+{% block stylessheets %}
+	{{ parent() }}
+	
+{% endblock %}
+{% block content %}
+	{{ parent() }}
+<div class="col-lg-5 col-lg-offset-1 box-form"> 
+	    <p class="h4 text-center mb-4">Registrar nuevo producto</p>
+
+	<hr/>
+	
+
+	{{form_start(form,{'action':'','method':'POST'})}}
+	<div class="md-form">
+		{{ form_row(form.name) }}
+	</div>
+	<div class="md-form">
+		{{ form_row(form.description) }}
+	</div>
+	<div class="md-form">
+		{{ form_row(form.price) }}
+	</div>
+	<div class="md-form">
+		{{ form_row(form.type) }}
+	</div>
+	
+	
+	
+	{{form_errors(form)}}
+	<center>
+	{{form_end(form)}}
+	</center>
+
+
+
+
+<!-- Material form contact -->
+                               
+                      
+
+	<script>
+	
+	 $(document).ready(function() {
+		 
+		 
+		 
+		 
+    $('.mdb-select').material_select();
+  });	
+	</script>
+
+</div>
+{% endblock%}
+
+ 

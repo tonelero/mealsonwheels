@@ -1,0 +1,12 @@
+product_new:
+    path: /product/new/{restaurant}
+    defaults: { _controller: DashboardBundle:Product:new,$restaurant:null }
+product_list:
+    path: /product/list/{restaurant}
+    defaults: { _controller: DashboardBundle:Product:list,$restaurant:null }
+product_edit:
+    path: /product/edit/{id}
+    defaults: { _controller: DashboardBundle:Product:edit,$id:null }
+product_delete:
+    path: /product/delete/{id}
+    defaults: { _controller: DashboardBundle:Product:delete,$id:null }

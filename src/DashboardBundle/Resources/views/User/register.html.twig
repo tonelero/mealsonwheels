@@ -1,0 +1,44 @@
+{% extends "DashboardBundle:Layouts:layout.html.twig"%}
+
+{% block content %}
+	{{ parent() }}
+<div class="col-lg-5 col-lg-offset-1 box-form"> 
+	    <p class="h4 text-center mb-4">Registrarse</p>
+
+	<hr/>
+	
+
+	{{form_start(form,{'action':'','method':'POST'})}}
+	<div class="md-form">
+		{{ form_row(form.name) }}
+	</div>
+	<div class="md-form">
+		{{ form_label(form.surname) }}
+		{{form_widget(form.surname)}}
+		{{form_errors(form.surname)}}
+	</div>
+	<div class="md-form">
+		{{ form_label(form.nick) }}
+		{{form_widget(form.nick)}}
+		{{form_errors(form.nick)}}
+	</div>
+	<div class="md-form">
+		{{ form_label(form.email) }}
+		{{form_widget(form.email)}}
+		{{form_errors(form.email)}}
+	</div>
+	<div class="md-form">
+		{{ form_label(form.password) }}
+		{{form_widget(form.password)}}
+		{{form_errors(form.password)}}
+	</div>
+	
+	
+
+	<center>
+	{{form_end(form)}}
+	</center>
+
+
+</div>
+{% endblock%}

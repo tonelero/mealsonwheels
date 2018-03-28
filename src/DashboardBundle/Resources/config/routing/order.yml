@@ -1,0 +1,9 @@
+order_list:
+    path: /order/list
+    defaults: { _controller: DashboardBundle:Order:list}
+orderdetail_list:
+    path: /orderdetail/list/{id}
+    defaults: { _controller: DashboardBundle:Order:edit,$id:null }
+order_delete:
+    path: /order/delete/{id}
+    defaults: { _controller: DashboardBundle:Order:delete,$id:null }
