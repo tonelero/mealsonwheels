@@ -73,7 +73,7 @@ class UserEditType extends AbstractType
 				
 				
 				
-				->add('Registrarse', SubmitType::class, array(
+				->add('Actualizar', SubmitType::class, array(
 					"attr" => array(
 						"class"=> "form-submit btn btn-outline-blue-grey"
 					)

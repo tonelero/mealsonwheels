@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 
 
 class OrderController extends Controller {
-	
+
 	public function listAction(Request $request, $user = null) {
 		$em = $this->getDoctrine()->getManager();
 		$orders_repo = $em->getRepository("BackendBundle:Orders");

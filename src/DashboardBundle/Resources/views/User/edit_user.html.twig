@@ -11,6 +11,16 @@
 	
 
 	{{form_start(form,{'action':'','method':'POST'})}}
+	
+	
+	<center>
+	{% if form.vars.value.image is not null %}
+    <img src="{{ asset('uploads/users/' ~ form.vars.value.image) }}" class="img-thumbnail" width="350px"/>
+	{% else %}
+		 <img src="{{ asset('uploads/users/default.jpg') }}" width ="250px"  alt="avatar mx-auto white" class="rounded-circle img-fluid" />
+{% endif %}
+{{form_widget(form.image)}}
+	</center>
 	<div class="md-form">
 		{{ form_row(form.name) }}
 	</div>
@@ -25,14 +35,7 @@
 		{{ form_row(form.email) }}
 	</div>
 	
-	{{form_label(form.image)}}
 	
-	{% if form.vars.value.image is not null %}
-    <img src="{{ asset('uploads/users/' ~ form.vars.value.image) }}" class="img-thumbnail" width="350px"/>
-	{% else %}
-		 <img src="{{ asset('uploads/users/default.jpg') }}" width ="250px"  alt="avatar mx-auto white" class="rounded-circle img-fluid" />
-{% endif %}
-{{form_widget(form.image)}}
 	
 	
 	{{form_errors(form)}}

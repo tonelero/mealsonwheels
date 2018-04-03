@@ -5,8 +5,13 @@ namespace BackendBundle\Entity;
 /**
  * Restaurants
  */
-
 use Symfony\Component\Validator\Constraints as Assert;
+ /**
+     * @SWG\Definition(
+     *   definition="restaurant"
+     * )
+     */
+
 class Restaurants
 {
     /**
@@ -16,6 +21,7 @@ class Restaurants
 
     /**
      * @var string
+	 * @SWG\Property(example="doggie")
      */
 
     private $description;

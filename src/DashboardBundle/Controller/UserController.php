@@ -172,7 +172,7 @@ class UserController extends Controller{
 				
 				
 				
-				
+				$alert="danger";
 				if (count($user_isset)==0){
 				$factory=$this->get("security.encoder_factory");
 					$encoder= $factory->getEncoder($user);
@@ -182,18 +182,16 @@ class UserController extends Controller{
 				$user->setRole("ROLE_OWNER");
 				$em->persist($user);
 				$flush= $em->flush();
-				
+					
 				if ($flush==null){
 					$status="Te has registrado correctamente";
-					//$this->session->getFlashBag()->add("status",$status);
-					//return $this->redirect("login");
-				}
+					$alert="info";				}
 				else{$status="No te has registrado correctamente";}
 				}else{$status= "El usuario ya existe";}
 			}else{
 				$status="No te has registrado correctamente";
 			}
-			$this->session->getFlashBag()->add("danger",$status);
+			$this->session->getFlashBag()->add($alert,$status);
 		
 		}
 	

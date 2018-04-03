@@ -1,5 +1,6 @@
 <?php
 
+
 namespace DashboardBundle\Controller;
 
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
@@ -8,11 +9,17 @@ use Symfony\Component\HttpFoundation\Request;
 use BackendBundle\Entity\Products;
 use DashboardBundle\Form\ProductsType;
 use Symfony\Component\HttpFoundation\Response;
-
+use Symfony\Component\HttpFoundation\Session\Session;
 class ProductController extends Controller{
-	
+	private $session;
+	public function __construct() {
+		$this->session=new Session();
+	}
 	public function newAction(Request $request, $restaurant=null){
 		
+//$swagger = \Swagger\scan('C:\wamp64\www\meals_on_wheels\src');
+//header('Content-Type: application/json');
+//echo $swagger;
 		
 		// COmprobar que es el dueño del restaurante
 	$product= new Products();
@@ -81,26 +88,24 @@ public function editAction(Request $request, $id = null) {
 
 		$form->handleRequest($request);
 		if ($form->isSubmitted()) {
-
+			$alert="info";
 			if ($form->isValid()) {
 
 				$em->persist($product);
 				$flush = $em->flush();
-
+				
 				if ($flush == null) {
-					$status = "Te has registrado correctamente";
+					$status = "Se ha actualizado correctamente";
 					//$this->session->getFlashBag()->add("status",$status);
 					//return $this->redirect("login");
 				} else {
 					$status = "No te has registrado correctamente";
 				}
-			} else {
-				$status = "El restaurante ya existe";
-			}
-		} else {
-			$status = "No te has registrado correctamente";
-		}
-		//$this->session->getFlashBag()->add("status",$status);
+				$this->session->getFlashBag()->add($alert,$status);
+			} 
+			
+		} 
+		
 
 
 

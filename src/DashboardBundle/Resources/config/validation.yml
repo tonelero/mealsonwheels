@@ -14,6 +14,23 @@ BackendBundle\Entity\Users:
                 min: 3
                 max: 20
                 minMessage: 'El nick debe ser superior a {{ limit }} caracteres'
-                maxMessage: 'El nick debe ser ingerior a {{ limit }} caracteres'
-        
+                maxMessage: 'El nick debe ser inferior a {{ limit }} caracteres'
+BackendBundle\Entity\Products:
+    properties:
+        name:
+            - Length:
+                min: 3
+                max: 25
+                minMessage: 'El nombre del producto debe ser superior a {{ limit }} caracteres'
+                maxMessage: 'El nombre del producto debe ser inferior a {{ limit }} caracteres' 
+        description:
+            - Length:
+                min: 5
+                max: 200
+                minMessage: 'La descripción del producto debe ser superior a {{ limit }} caracteres'
+                maxMessage: 'La descripción del producto debe ser inferior a {{ limit }} caracteres'
+        price:
+            - Type:
+                type: numeric
+                message: 'El valor {{ value }} no es válido, por favor introduce una cantidad'
         

@@ -10,6 +10,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\MoneyType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
 
 class ProductsType extends AbstractType {
 
@@ -53,7 +54,7 @@ class ProductsType extends AbstractType {
 					)
 				))
 				
-				->add('Registrar Producto', SubmitType::class, array(
+				->add('boton', SubmitType::class, array(
 					"attr" => array(
 						"class" => "btn btn-outline-blue-grey"
 					)
