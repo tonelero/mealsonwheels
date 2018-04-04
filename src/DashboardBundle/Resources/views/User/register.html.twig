@@ -10,7 +10,9 @@
 
 	{{form_start(form,{'action':'','method':'POST'})}}
 	<div class="md-form">
-		{{ form_row(form.name) }}
+		{{form_label(form.name)}}
+		{{form_widget(form.name)}}
+		{{form_errors(form.name)}}
 	</div>
 	<div class="md-form">
 		{{ form_label(form.surname) }}

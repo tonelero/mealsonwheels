@@ -74,14 +74,14 @@ class RestaurantsEditType extends AbstractType {
 						'class' => 'form-name form-control'
 					)
 				))
-				->add('num', NumberType::class,array(
+				->add('num', TextType::class,array(
 					'label' => 'Numero',
 					'required' => 'required',
 					'attr' => array(
 						'class' => 'form-name form-control'
 					)
 				))
-				->add('postCode', NumberType::class,array(
+				->add('postCode', TextType::class,array(
 					'label' => 'Codigo Postal',
 					'required' => 'required',
 					'attr' => array(
@@ -117,6 +117,19 @@ class RestaurantsEditType extends AbstractType {
 						"placeholder"=>"Selecciona hora"
 					),
 					
+				))
+				->add('category', ChoiceType::class, array(
+					'label' => 'Tipo',
+					'required' => 'required',
+					'choices' => array(
+						'Mexicano' => 'mexicano',
+						'Colombiano' => 'colombiano',
+						'Oriental' => 'oriental',
+						'Marroquí' => 'marroqui',
+						'Indio' => 'indio',
+					),'attr' => array(
+						'class' => 'mdb-select'
+					)
 				))
 				->add('endTime', TextType::class, array(
 					'label' => 'Hora cierre ',

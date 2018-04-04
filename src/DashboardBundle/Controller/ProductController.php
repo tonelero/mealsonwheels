@@ -28,7 +28,7 @@ class ProductController extends Controller{
 	
 	$form->handleRequest($request);
 		if ($form->isSubmitted()){
-			
+			$alert="success";
 			if ($form->isValid()){
 
 				$em=$this->getDoctrine()->getManager();
@@ -40,16 +40,19 @@ class ProductController extends Controller{
 				$flush= $em->flush();
 				
 				if ($flush==null){
-					$status="Te has registrado correctamente";
-					//$this->session->getFlashBag()->add("status",$status);
+					
+					$status="Has añadido el producto correctamente";
 					//return $this->redirect("login");
 				}
-				else{$status="No te has registrado correctamente";}
-				}else{$status= "El restaurante ya existe";}
+				else{$status="No has añadido el producto correctamente";}
+				}else{
+					$alert="error";
+					$status= "No has añadido el producto correctamente";}
+					$this->session->getFlashBag()->add($alert,$status);
 			}else{
-				$status="No te has registrado correctamente";
+				$status="No has añadido el producto correctamente";
 			}
-			//$this->session->getFlashBag()->add("status",$status);
+			
 		
 	
 	
@@ -95,14 +98,19 @@ public function editAction(Request $request, $id = null) {
 				$flush = $em->flush();
 				
 				if ($flush == null) {
-					$status = "Se ha actualizado correctamente";
+					$status = "El producto se ha actualizado correctamente";
 					//$this->session->getFlashBag()->add("status",$status);
 					//return $this->redirect("login");
 				} else {
-					$status = "No te has registrado correctamente";
+					$alert="error";
+					$status = "El producto no se ha actualizado";
 				}
-				$this->session->getFlashBag()->add($alert,$status);
-			} 
+				
+			
+				
+			} else {$alert="error";
+					$status = "El producto no se ha actualizado";}
+			$this->session->getFlashBag()->add($alert,$status);
 			
 		} 
 		
@@ -129,13 +137,14 @@ public function deleteAction(Request $request, $id = null) {
 			$flush = $em->flush();
 
 			if ($flush == null) {
-				$status = 'la publicacion ha sido borrada correctamente';
+				$status = 'El producto se ha borrado correctamente';
 			} else {
-				$status = 'la publicacion no se ha borrado';
+				$status = 'El producto no se ha borrado';
 			}
 		} else {
-			$status = 'la publicacion no se ha borrado';
+			$status = 'El producto no se ha borrado';
 		}
+		$this->session->getFlashBag()->add("warning",$status);
 		return new Response($status);
 	}
 }

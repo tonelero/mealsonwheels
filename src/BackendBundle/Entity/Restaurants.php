@@ -6,6 +6,7 @@ namespace BackendBundle\Entity;
  * Restaurants
  */
 use Symfony\Component\Validator\Constraints as Assert;
+use Swagger\Annotations as SWG;
  /**
      * @SWG\Definition(
      *   definition="restaurant"

@@ -1,12 +1,25 @@
-#BackendBundle\Entity\Restaurants:
-#    properties:
-#        description:
-#            - Length:
-#                min: 20
-#                max: 250
-#                minMessage: 'La descripción debe ser superior a {{ limit }} caracteres'
-#                maxMessage: 'La descripción debe ser inferior a {{ limit }} caracteres'
-#        
+BackendBundle\Entity\Restaurants:
+    properties:
+        minOrder:
+            - Type:
+                type: numeric
+                message: 'El valor {{ value }} no es válido, por favor introduce una cantidad'
+        deliveryCost:
+            - Type:
+                type: numeric
+                message: 'El valor {{ value }} no es válido, por favor introduce una cantidad'
+        postCode:
+            - Type:
+                type: numeric
+                message: 'El valor {{ value }} no es válido, por favor introduce digitos'
+        description:
+            - Length:
+                min: 20
+                max: 250
+                minMessage: 'La descripción debe ser superior a {{ limit }} caracteres'
+                maxMessage: 'La descripción debe ser inferior a {{ limit }} caracteres'
+        
+        
 BackendBundle\Entity\Users:
     properties:
         nick:

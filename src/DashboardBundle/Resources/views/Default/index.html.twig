@@ -1,50 +1,40 @@
-<!DOCTYPE html>
-<html>
+{% extends "DashboardBundle:Layouts:layout.html.twig"%}
+{% block stylessheets %}
+	{{ parent() }}
 
-<head>
-    <script data-require="jquery@*" data-semver="2.0.3" src="http://code.jquery.com/jquery-2.0.3.min.js"></script>
-    <script data-require="bootstrap@*" data-semver="3.1.1" src="//netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
-    <link data-require="bootstrap-css@*" data-semver="3.1.1" rel="stylesheet" href="//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="style.css" />
-    <script src="script.js"></script>
-</head>
 
-<body>
 
-    <div><a href="#myModal" data-toggle="modal" id="1" data-target="#edit-modal">Edit 1</a></div>
-    <div><a href="#myModal" data-toggle="modal" id="2" data-target="#edit-modal">Edit 2</a></div>
-    <div><a href="#myModal" data-toggle="modal" id="3" data-target="#edit-modal">Edit 3</a></div>
 
-    <div id="edit-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
-                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
-                </div>
-                <div class="modal-body edit-content">
-                    ...
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary">Save changes</button>
-                </div>
-            </div>
-        </div>
-    </div>
+{% endblock %}
+{% block content %}
+	{{ parent() }}
+	<style>
+		 .ajs-message.ajs-custom { color: #F4F8FB;  background-color: #1A395B;  border-color: #1A395B; }
+	</style>
 
-    <script>
-        $('#edit-modal').on('show.bs.modal', function(e) {
-            
-            var $modal = $(this),
-                esseyId = e.relatedTarget.id;
+       <script type="text/javascript">  
 
-                    $modal.find('.edit-content').html(esseyId);
+ alertify.notify('custom message.', 'custom', 3, function(){console.log('dismissed');});
+  toastr.options = {
+  "closeButton": false,
+  "debug": false,
+  "newestOnTop": false,
+  "progressBar": false,
+  "positionClass": "toast-top-right",
+  "preventDuplicates": false,
+  "onclick": null,
+  "showDuration": 300,
+  "hideDuration": 1000,
+  "timeOut": 5000,
+  "extendedTimeOut": 1000,
+  "showEasing": "swing",
+  "hideEasing": "linear",
+  "showMethod": "fadeIn",
+  "hideMethod": "fadeOut"
+};
+  
+toastr.warning('Usuario o Contraseña incorrectos');
 
-            
-        });
-    </script>
-
-</body>
-
-</html>
+</script>  
+  
+{% endblock%}

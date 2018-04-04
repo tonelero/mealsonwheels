@@ -9,9 +9,13 @@ use BackendBundle\Entity\Restaurants;
 use DashboardBundle\Form\RestaurantsType;
 use DashboardBundle\Form\RestaurantsEditType;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpFoundation\Session\Session;
 
 class RestaurantController extends Controller {
-
+private $session;
+	public function __construct() {
+		$this->session=new Session();
+	}
 	public function registerAction(Request $request) {
 		$restaurant = new Restaurants();
 		$form = $this->createForm(RestaurantsEditType::class, $restaurant);
@@ -19,7 +23,7 @@ class RestaurantController extends Controller {
 
 		$form->handleRequest($request);
 		if ($form->isSubmitted()) {
-
+	$alert="success";
 			if ($form->isValid()) {
 
 				// upload image
@@ -53,19 +57,23 @@ class RestaurantController extends Controller {
 				$flush = $em->flush();
 
 				if ($flush == null) {
-					$status = "Te has registrado correctamente";
+					$status = "El restaurante se ha registrado";
 					//$this->session->getFlashBag()->add("status",$status);
 					//return $this->redirect("login");
 				} else {
-					$status = "No te has registrado correctamente";
+					$alert="error";
+					$status = "No se ha registrado el restaurante";
 				}
 			} else {
-				$status = "El restaurante ya existe";
+				$alert="error";
+				$status = "No se ha registrado el restaurante";
+				
 			}
+			$this->session->getFlashBag()->add($alert,$status);
 		} else {
-			$status = "No te has registrado correctamente";
+			$status = "No se ha registrado el restaurante";
 		}
-		//$this->session->getFlashBag()->add("status",$status);
+		
 
 
 
@@ -120,7 +128,7 @@ class RestaurantController extends Controller {
 		
 		$form->handleRequest($request);
 		if ($form->isSubmitted()) {
-			
+			$alert="success";
 			if ($form->isValid()) {
 				
 				// upload image
@@ -146,19 +154,21 @@ class RestaurantController extends Controller {
 				$flush = $em->flush();
 
 				if ($flush == null) {
-					$status = "Te has registrado correctamente";
+					$status = "El restaurante se ha actualizado correctamente";
 					//$this->session->getFlashBag()->add("status",$status);
 					//return $this->redirect("login");
 				} else {
-					$status = "No te has registrado correctamente";
+					$alert="error";
+					$status = "No se ha actualizado";
 				}
 			} else {
-				$status = "El restaurante ya existe";
+				$status = "No se ha actualizado";
 			}
+			$this->session->getFlashBag()->add($alert,$status);
 		} else {
-			$status = "No te has registrado correctamente";
+			$status = "No se ha actualizado";
 		}
-		//$this->session->getFlashBag()->add("status",$status);
+		
 
 
 
@@ -182,13 +192,14 @@ class RestaurantController extends Controller {
 			$flush = $em->flush();
 
 			if ($flush == null) {
-				$status = 'la publicacion ha sido borrada correctamente';
+				$status = 'El restaurante se ha borrado correctamente';
 			} else {
-				$status = 'la publicacion no se ha borrado';
+				$status = 'EL restaurante no se ha borrado';
 			}
 		} else {
-			$status = 'la publicacion no se ha borrado';
+			$status = 'El restaurante no se ha borrado';
 		}
+		$this->session->getFlashBag()->add("warning",$status);
 		return new Response($status);
 	}
 

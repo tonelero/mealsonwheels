@@ -18,26 +18,44 @@
 		</div>
 		<div class="md-form">
 			{{form_label(form.name)}}
-			{{form_widget(form.name)}}
+		{{form_widget(form.name)}}
+		{{form_errors(form.name)}}
 		</div>
 		<div class="md-form">
-			{{ form_row(form.description) }}
+			{{form_label(form.description)}}
+		{{form_widget(form.description)}}
+		{{form_errors(form.description)}}
 		</div>
 		<div class="md-form">
-			{{ form_row(form.minOrder) }}
+			{{form_label(form.category)}}
+		{{form_widget(form.category)}}
+		{{form_errors(form.category)}}
 		</div>
 		<div class="md-form">
-			{{ form_row(form.deliveryCost) }}
+			{{form_label(form.minOrder)}}
+		{{form_widget(form.minOrder)}}
+		{{form_errors(form.minOrder)}}
+		</div>
+		<div class="md-form">
+			{{form_label(form.deliveryCost)}}
+		{{form_widget(form.deliveryCost)}}
+		{{form_errors(form.deliveryCost)}}
 		</div>
 
 		<div class="md-form">
-			{{ form_row(form.street) }}
+			{{form_label(form.street)}}
+		{{form_widget(form.street)}}
+		{{form_errors(form.street)}}
 		</div>
 		<div class="md-form">
-			{{ form_row(form.num) }}
+			{{form_label(form.num)}}
+		{{form_widget(form.num)}}
+		{{form_errors(form.num)}}
 		</div>
 		<div class="md-form">
-			{{ form_row(form.postCode) }}
+			{{form_label(form.postCode)}}
+		{{form_widget(form.postCode)}}
+		{{form_errors(form.postCode)}}
 		</div>
 		<div class="md-form">
 			{{ form_row(form.startTime) }}
@@ -48,7 +66,7 @@
 
 
 
-		{{form_errors(form)}}
+		
 		<center>
 			{{form_end(form)}}
 		</center>

@@ -10,8 +10,13 @@ use DashboardBundle\Form\OrderDetailsType;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\HttpFoundation\Session\Session;
 class OrderController extends Controller{
+	private $session;
 	
+	public function __construct() {
+		$this->session=new Session();
+	}
 	
 public function listAction(Request $request) {
 		$em = $this->getDoctrine()->getManager();
@@ -72,14 +77,15 @@ public function editAction(Request $request, $id = null) {
 				$order->setProduct($prodObject);
 				$em->persist($order);
 				$flush = $em->flush();
-			
+				$this->session->getFlashBag()->add("success","El producto se ha añadido correctamente");
+			return $this->redirectToRoute('orderdetail_list', array('id' => $order->getOrder()->getId()));
 			} else {
 				$status = "El restaurante ya existe";
 			}
 		} else {
 			$status = "No te has registrado correctamente";
 		}
-		//$this->session->getFlashBag()->add("status",$status);
+		
 
 
 
@@ -104,13 +110,14 @@ public function deleteAction(Request $request, $id = null) {
 			$flush = $em->flush();
 
 			if ($flush == null) {
-				$status = 'la publicacion ha sido borrada correctamente';
+				$status = 'El producto se ha borrado correctamente';
 			} else {
-				$status = 'la publicacion no se ha borrado';
+				$status = 'El producto no se ha borrado';
 			}
 		} else {
-			$status = 'la publicacion no se ha borrado';
+			$status = 'El producto no se ha borrado';
 		}
+		$this->session->getFlashBag()->add("warning",$status);
 		return $this->redirectToRoute('orderdetail_list', array('id' => $order->getOrder()->getId()));
 	}
 }

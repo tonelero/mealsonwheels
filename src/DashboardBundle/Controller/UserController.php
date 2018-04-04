@@ -36,7 +36,9 @@ class UserController extends Controller{
 		$autenticationUtils=$this->get('security.authentication_utils');
 		$error= $autenticationUtils->getLastAuthenticationError();
 		$lastUsername= $autenticationUtils->getLastUsername();
-		
+		if ($error){
+			$this->session->getFlashBag()->add("warning","Usuario o Contraseña incorrectos");
+		}
 		return $this->render('DashboardBundle:User:login.html.twig',array(
 		'last_username'=>$lastUsername,
 			'error'=>$error,
@@ -172,7 +174,7 @@ class UserController extends Controller{
 				
 				
 				
-				$alert="danger";
+				$alert="warning";
 				if (count($user_isset)==0){
 				$factory=$this->get("security.encoder_factory");
 					$encoder= $factory->getEncoder($user);
@@ -185,7 +187,7 @@ class UserController extends Controller{
 					
 				if ($flush==null){
 					$status="Te has registrado correctamente";
-					$alert="info";				}
+					$alert="success";				}
 				else{$status="No te has registrado correctamente";}
 				}else{$status= "El usuario ya existe";}
 			}else{
@@ -206,6 +208,7 @@ class UserController extends Controller{
 		$form =$this->createForm(UserEditType::class,$user);
 		
 		$form->handleRequest($request);
+		$alert="success";
 		if ($form->isSubmitted()){
 			if ($form->isValid()){
 				$em=$this->getDoctrine()->getManager();
@@ -240,7 +243,7 @@ class UserController extends Controller{
 			}else{
 				$status="No se han actualizado los datos";
 			}
-			//$this->session->getFlashBag()->add("status",$status);
+			$this->session->getFlashBag()->add($alert,$status);
 			return $this->redirect('my-data');
 		}
 		
