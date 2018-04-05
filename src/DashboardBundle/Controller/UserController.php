@@ -66,8 +66,8 @@ class UserController extends Controller{
 			
 			if ($signup == 'error'){
 			
-				$response = array ("Error"=> "Not Authorized");
-				return new JsonResponse($response,401);
+				$response = array ("Error"=> "User not found");
+				return new JsonResponse($response,404);
 			}
 			
 			//Devolver rl token en formato json
@@ -256,7 +256,44 @@ class UserController extends Controller{
 					"form" => $form->createView()
 				)); 
 	}
-	public function uploadImageAction(Request $request){
+	public function deleteAction(Request $request) {
+
+		$jwt_auth = $this->get("app.jwt_auth");
+		// por si no lo lleva en la cabecera
+		$check = false;
+		$hash = $request->headers->get('token');
+		$check = $jwt_auth->checkToken($hash, true);
+		if ($check == false) {
+			$response = array("Error" => "Not Authorized");
+			return new JsonResponse($response, 401);
+		}
+
+		$em = $this->getDoctrine()->getManager();
+
+		$id = $check->sub;
+		$user_repo = $em->getRepository('BackendBundle:Users');
+		$id = $user_repo->find($id);
+
+		if ($id == null) {
+
+			$response = array("Error" => "User does not exists");
+			return new JsonResponse($response, 404);
+		} else {
+				$em->remove($id);
+
+				$flush = $em->flush();
+				if ($flush==null){
+					$response = array("Ok" => "User deleted");
+				return new JsonResponse($response, 200);
+				}
+				
+		
+				$response = array("Error" => "User could not be deleted");
+				return new JsonResponse($response, 403);
+			
+		}
+	}
+	public function uploadAction(Request $request){
 		$jwt_auth =$this->get("app.jwt_auth");
 		// por si no lo lleva en la cabecera
 		$check = false;
@@ -290,6 +327,40 @@ class UserController extends Controller{
 		
 		return new JsonResponse($response,200);		
 	}
+//	public function uploadImageAction(Request $request){
+//		$jwt_auth =$this->get("app.jwt_auth");
+//		// por si no lo lleva en la cabecera
+//		$check = false;
+//		
+//		$hash=$request->headers->get('token');
+//		$check =$jwt_auth->checkToken($hash,true);
+//		if ($check == false){
+//		$response = array ("Error"=> "Not Authorized");
+//		return new JsonResponse($response,401);
+//		
+//		}
+//		$em = $this->getDoctrine()->getManager();
+//		$user = $em->getRepository("BackendBundle:Users")->findOneBy(array(
+//				"id"=>$check->sub
+//				));
+//		$file =$request->files->get("image");
+//		if(!empty($file) &&$file != null){
+//			$ext = $file->guessExtension();
+//			if($ext=='jpeg'||$ext=='jpg'||$ext=='gif'||$ext=='png'){
+//			$file_name = time().".".$ext;
+//			$file->move("uploads/users",$file_name);
+//			
+//			$user->setImage($file_name);
+//			$em->persist($user);
+//			$em->flush();
+//			
+//			$response = array ("Ok"=> "imagen cambiada");
+//		}else{
+//			$response = array ("Error"=> "file not valid");
+//		}}else { $response = array ("Error"=> "imagen vacia");}
+//		
+//		return new JsonResponse($response,200);		
+//	}
 }
 
 

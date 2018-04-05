@@ -1,19 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
-    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="2"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/wamp64/www/meals_on_wheels/src/DashboardBundle/Resources/views/Products/list.html.twig</file>
+            <file>file:/C:/wamp64/www/meals_on_wheels/src/DashboardBundle/Resources/config/routing.yml</file>
             <file>file:/C:/wamp64/www/meals_on_wheels/src/DashboardBundle/Controller/ProductController.php</file>
             <file>file:/C:/wamp64/www/meals_on_wheels/src/DashboardBundle/Controller/UserController.php</file>
+            <file>file:/C:/wamp64/www/meals_on_wheels/src/BackendBundle/Entity/Products.php</file>
+            <file>file:/C:/wamp64/www/meals_on_wheels/src/DashboardBundle/Resources/views/Restaurant/edit.html.twig</file>
+            <file>file:/C:/wamp64/www/meals_on_wheels/src/DashboardBundle/Form/RestaurantsEditType.php</file>
+            <file>file:/C:/wamp64/www/meals_on_wheels/src/DashboardBundle/Resources/views/Restaurant/register.html.twig</file>
+            <file>file:/C:/wamp64/www/meals_on_wheels/src/BackendBundle/Entity/Restaurants.php</file>
+            <file>file:/C:/wamp64/www/meals_on_wheels/src/DashboardBundle/Form/RestaurantsType.php</file>
             <file>file:/C:/wamp64/www/meals_on_wheels/src/DashboardBundle/Resources/config/validation.yml</file>
-            <file>file:/C:/wamp64/www/meals_on_wheels/src/DashboardBundle/Resources/views/Products/edit.html.twig</file>
-            <file>file:/C:/wamp64/www/meals_on_wheels/src/DashboardBundle/Resources/views/User/register.html.twig</file>
+            <file>file:/C:/wamp64/www/meals_on_wheels/src/BackendBundle/Entity/Orders.php</file>
             <file>file:/C:/wamp64/www/meals_on_wheels/src/DashboardBundle/Controller/RestaurantController.php</file>
             <file>file:/C:/wamp64/www/meals_on_wheels/src/DashboardBundle/Controller/OrderController.php</file>
-            <file>file:/C:/wamp64/www/meals_on_wheels/src/DashboardBundle/Resources/views/User/login.html.twig</file>
-            <file>file:/C:/wamp64/www/meals_on_wheels/src/DashboardBundle/Form/ProductsType.php</file>
-            <file>file:/C:/wamp64/www/meals_on_wheels/src/DashboardBundle/Resources/views/Products/register.html.twig</file>
+            <file>file:/C:/wamp64/www/meals_on_wheels/src/BackendBundle/Entity/OrderDetails.php</file>
         </group>
     </open-files>
 </project-private>

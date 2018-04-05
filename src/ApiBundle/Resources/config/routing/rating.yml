@@ -4,3 +4,6 @@ ratings:
 rating_new:
     path: api/rating/new
     defaults: {_controller : ApiBundle:Rating:new}
+rating_delete:
+    path: api/rating/delete/{rating}
+    defaults: {_controller : ApiBundle:Rating:delete,rating:null}

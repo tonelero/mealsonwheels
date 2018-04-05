@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1:3306
--- Tiempo de generación: 26-03-2018 a las 06:43:57
+-- Tiempo de generación: 05-04-2018 a las 09:58:47
 -- Versión del servidor: 5.7.19
 -- Versión de PHP: 7.0.23
 
@@ -36,9 +36,9 @@ CREATE TABLE IF NOT EXISTS `orders` (
   `restaurant` int(255) DEFAULT NULL,
   `valid` tinyint(1) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
-  KEY `fk_orders_users` (`user`),
-  KEY `fk_orders_restautants` (`restaurant`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  KEY `fk_orders_restautants` (`restaurant`),
+  KEY `fk_orders_users` (`user`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `orders`
@@ -46,7 +46,8 @@ CREATE TABLE IF NOT EXISTS `orders` (
 
 INSERT INTO `orders` (`id`, `user`, `created_at`, `restaurant`, `valid`) VALUES
 (1, 4, '2018-03-20 09:13:05', 1, 0),
-(2, 4, '2018-03-23 09:52:15', 2, 1);
+(2, 4, '2018-03-23 09:52:15', 2, 1),
+(3, 4, '2018-03-02 00:00:00', 2, 1);
 
 -- --------------------------------------------------------
 
@@ -63,15 +64,16 @@ CREATE TABLE IF NOT EXISTS `order_details` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `order_uniques_fields` (`order_id`,`product`),
   KEY `fk_details_products` (`product`)
-) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `order_details`
 --
 
 INSERT INTO `order_details` (`id`, `order_id`, `product`, `quantity`) VALUES
-(1, 1, 1, 5),
-(14, 1, 4, 1);
+(15, 2, 3, 9),
+(17, 1, 1, 3),
+(24, 1, 4, 4);
 
 -- --------------------------------------------------------
 
@@ -89,16 +91,18 @@ CREATE TABLE IF NOT EXISTS `products` (
   `type` varchar(25) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `fk_products_restaurants` (`restaurant`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `products`
 --
 
 INSERT INTO `products` (`id`, `restaurant`, `name`, `description`, `price`, `type`) VALUES
-(1, 1, 'bocadillo', 'producto', '5.00', 'tapa'),
+(1, 1, 'bocadillo', 'producto', '5.20', 'tapa'),
 (3, 2, 'producto2', 'producto', '65.00', 'tapa'),
-(4, 1, 'carcasa de bravas', 'carcasa de bravas', '10.00', 'primer plato');
+(4, 1, 'plato de bravas', 'carcasa de bravas', '5.36', 'primer plato'),
+(5, 2, 'Aguacate', 'Aguacatedfsf', '2.25', 'postre'),
+(24, 1, 'Tortilla de patatas', 'Tortilla de patatas casera a la francesa', '2.25', 'otro');
 
 -- --------------------------------------------------------
 
@@ -117,7 +121,7 @@ CREATE TABLE IF NOT EXISTS `ratings` (
   PRIMARY KEY (`id`),
   KEY `fk_ratings_users` (`user`),
   KEY `fk_ratings_restaurants` (`restaurant`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -150,8 +154,8 @@ CREATE TABLE IF NOT EXISTS `restaurants` (
 --
 
 INSERT INTO `restaurants` (`id`, `user`, `name`, `description`, `min_order`, `delivery_cost`, `image`, `category`, `street`, `num`, `post_code`, `days`, `start_time`, `end_time`) VALUES
-(1, 2, 'restaurant', 'restaurant', '5.00', '5.00', NULL, 'mexicano', '5', '5', '5', 'a:3:{i:0;s:1:\"m\";i:1;s:1:\"x\";i:2;s:1:\"d\";}', '07:31:00', '05:39:00'),
-(2, 2, '2', '2', '2.00', '2.00', '21521549645.jpeg', 'mexicano', '2', '2', '2', 'a:3:{i:0;s:1:\"x\";i:1;s:1:\"j\";i:2;s:1:\"d\";}', '09:00:00', '19:20:00');
+(1, 2, 'Restaurante Luna Rosa', 'VEGAN FRIENDLY. Un buffé libre económico y variado que ademas, cuenta con bastantes opciones veganas y vegetarianas, ideal tanto si vas con nenes como para otras reuniones mas intimas o informales, un servicio muy atento y buen ambiente. 100% recomendable.', '5.00', '5.00', NULL, 'oriental', '5', '5', '5', 'a:3:{i:0;s:1:\"m\";i:1;s:1:\"x\";i:2;s:1:\"d\";}', '07:31:00', '05:39:00'),
+(2, 2, 'El Rincón de la papa', '¿Los comentarios de HTML dan para un post? ¿Lo merecen siendo tan fáciles de hacer? Yo creo que sí, y si no, me lo cuentas al final en los comentarios.', '2.00', '2.00', '21521549645.jpeg', 'mexicano', '2', '2', '2', 'a:3:{i:0;s:1:\"x\";i:1;s:1:\"j\";i:2;s:1:\"d\";}', '09:00:00', '19:20:00');
 
 -- --------------------------------------------------------
 
@@ -172,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `users` (
   `image` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `users_uniques_fields` (`email`,`nick`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
 --
 -- Volcado de datos para la tabla `users`
@@ -180,10 +184,10 @@ CREATE TABLE IF NOT EXISTS `users` (
 
 INSERT INTO `users` (`id`, `role`, `email`, `name`, `surname`, `password`, `nick`, `bio`, `image`) VALUES
 (1, 'ROLE_OWNER', 'usuario@usuario.com', 'usuario', 'usuario', 'usuario', 'usuario', NULL, NULL),
-(2, 'ROLE_OWNER', 'prueba@prueba.com', 'prueba', 'prueba', '$2y$04$wCyCcX2xREFIbDG7A.37vuY.Nxx4V3ljLmiPB/DMTHcZjOSE1.rNK', 'prueba', NULL, '21521549097.png'),
+(2, 'ROLE_OWNER', 'prueba@prueba.com', 'prueba', 'prueba', '$2y$04$wCyCcX2xREFIbDG7A.37vuY.Nxx4V3ljLmiPB/DMTHcZjOSE1.rNK', 'prueba441', NULL, '21522229983.jpeg'),
 (3, 'ROLE_USER', 'hola@1hola.com', NULL, NULL, 'b221d9dbb083a7f33428d7c2a3c3198ae925614d70210e28716ccaa7cd4ddb79', 'hola1', NULL, NULL),
-(4, 'ROLE_USER', 'api@api.com', NULL, NULL, '14c2529eb4498c5d1ffd6915d05bf58a91bdda796af59f41d480d11c099d0479', 'api', NULL, NULL),
-(6, 'ROLE_USER', 'prueba2@prueba2.com', NULL, NULL, '92573009c9ed328bd9d47d7187e01eb0abe4b995fb6abe0724b4f53bed590264', 'prueba2', NULL, '1521800813.jpeg');
+(4, 'ROLE_USER', 'api@api.com', 'Alfonso', NULL, '14c2529eb4498c5d1ffd6915d05bf58a91bdda796af59f41d480d11c099d0479', 'api', NULL, '1522918131.jpeg'),
+(12, 'ROLE_OWNER', 'aa@a.com', 'a', 'a', '$2y$04$Myf3WCy7Ymp4UMyyTgetjOSqU26vQmwysnxuWrx6oW1oWCx.3rf7G', 'a', NULL, NULL);
 
 --
 -- Restricciones para tablas volcadas

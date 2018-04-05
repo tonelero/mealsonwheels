@@ -22,6 +22,10 @@ prueba:
 register2:
     path: api/register
     defaults: { _controller: DashboardBundle:User:register2 }
+delete:
+    path: api/delete
+    defaults: { _controller: DashboardBundle:User:delete}
+    
 upload:
     path: api/upload-image-user
     defaults: { _controller: DashboardBundle:User:uploadImage }
