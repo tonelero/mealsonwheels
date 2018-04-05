@@ -108,6 +108,7 @@ class UserController extends Controller{
 		$params = json_decode($json);
 			$data = array();
 		if($json != null){
+			
 			$role="ROLE_USER";
 			$email = (isset($params->email)) ? $params->email : null;
 			$name = (isset($params->name)) ? $params->name : null;
@@ -293,7 +294,97 @@ class UserController extends Controller{
 			
 		}
 	}
-	public function uploadAction(Request $request){
+	public function updateAction(Request $request){
+		$jwt_auth =$this->get("app.jwt_auth");
+		// por si no lo lleva en la cabecera
+		$check = false;
+		
+		$hash=$request->headers->get('token');
+		$check =$jwt_auth->checkToken($hash,true);
+		if ($check == false){
+		$response = array ("Error"=> "Not Authorized");
+		return new JsonResponse($response,401);
+		}
+		$em = $this->getDoctrine()->getManager();
+		$id=$check->sub;
+		$user_repo=$em->getRepository("BackendBundle:Users");
+		$user = $user_repo->findOneBy(array(
+				"id"=>$id
+				));
+		
+		
+		// json body
+		$json=$request->get("json",null);
+		$params = json_decode($json);
+			$data = array();
+			
+			
+			if($json != null){
+			
+				
+				if (isset($params->email)){
+					$query = $user_repo->createQueryBuilder('u')
+							->where('u.email=:email and u.id!=:id ')
+						->setParameter('email',$params->email)
+							->setParameter('id',$id)
+							->getQuery();
+				$user_isset=$query->getResult();
+				if (count($user_isset)==0){
+					
+					$user->setEmail($params->email);
+				}else {
+					
+				$response = array ("Error"=> "email already exists");
+		return new JsonResponse($response,409);
+				
+			}
+				}
+				if (isset($params->name)){
+					$user->setName($params->name);
+				}
+				if (isset($params->surname)){
+					$user->setSurname($params->surname);
+				
+				}
+				if (isset($params->password)){
+					$pwd=hash('sha256',$params->password);
+					$user->setPassword($pwd);
+				}
+				if (isset($params->nick)){
+					$query = $user_repo->createQueryBuilder('u')
+							->where('u.nick=:nick and u.id!=:id ')
+						->setParameter('nick',$params->nick)
+							->setParameter('id',$id)
+							->getQuery();
+				$user_isset=$query->getResult();
+				if (count($user_isset)==0){
+					
+					$user->setNick($params->nick);
+				}else {
+					echo(count($user_isset));
+				$response = array ("Error"=> "nick already exists");
+		return new JsonResponse($response,409);
+				
+			}
+				
+				}
+				if (isset($params->bio)){
+					$user->setBio($params->bio);
+				}
+				$em->persist($user);
+				$em->flush();
+			$response = array ("Ok"=> "user updated");
+		return new JsonResponse($response,200);
+				
+			} else {
+				$response = array ("Error"=> "not json");
+		return new JsonResponse($response,400);
+				
+			}
+			
+	}
+
+	public function uploadImageAction(Request $request){
 		$jwt_auth =$this->get("app.jwt_auth");
 		// por si no lo lleva en la cabecera
 		$check = false;
@@ -327,40 +418,6 @@ class UserController extends Controller{
 		
 		return new JsonResponse($response,200);		
 	}
-//	public function uploadImageAction(Request $request){
-//		$jwt_auth =$this->get("app.jwt_auth");
-//		// por si no lo lleva en la cabecera
-//		$check = false;
-//		
-//		$hash=$request->headers->get('token');
-//		$check =$jwt_auth->checkToken($hash,true);
-//		if ($check == false){
-//		$response = array ("Error"=> "Not Authorized");
-//		return new JsonResponse($response,401);
-//		
-//		}
-//		$em = $this->getDoctrine()->getManager();
-//		$user = $em->getRepository("BackendBundle:Users")->findOneBy(array(
-//				"id"=>$check->sub
-//				));
-//		$file =$request->files->get("image");
-//		if(!empty($file) &&$file != null){
-//			$ext = $file->guessExtension();
-//			if($ext=='jpeg'||$ext=='jpg'||$ext=='gif'||$ext=='png'){
-//			$file_name = time().".".$ext;
-//			$file->move("uploads/users",$file_name);
-//			
-//			$user->setImage($file_name);
-//			$em->persist($user);
-//			$em->flush();
-//			
-//			$response = array ("Ok"=> "imagen cambiada");
-//		}else{
-//			$response = array ("Error"=> "file not valid");
-//		}}else { $response = array ("Error"=> "imagen vacia");}
-//		
-//		return new JsonResponse($response,200);		
-//	}
 }
 
 

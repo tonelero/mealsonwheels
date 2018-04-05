@@ -27,6 +27,10 @@ delete:
     defaults: { _controller: DashboardBundle:User:delete}
     
 upload:
+    path: api/update
+    defaults: { _controller: DashboardBundle:User:update }
+    methods: POST    
+upload_image:
     path: api/upload-image-user
     defaults: { _controller: DashboardBundle:User:uploadImage }
     methods: POST

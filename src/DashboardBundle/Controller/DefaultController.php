@@ -11,3 +11,5 @@ class DefaultController extends Controller
         return $this->render('DashboardBundle:Default:index.html.twig');
     }
 }
+
+
